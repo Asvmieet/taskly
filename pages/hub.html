@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="/css/hub.css">
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+
+<template id="tasktemplate">
+    <div class="nextto2">
+        <button class="completebutton" onclick="remove(this)">✔</button>
+        <input type="text" class="taskinput" placeholder="Task Name">
+    </div>
+    
+</template>
+
+<div class="todo" id="todosection">
+    <div class="nextto">
+    <h1 class="objectTitle">To-Do</h1>
+    <button class="addbutton" onclick="createtask()">+</button>
+</div> <!-- nextto -->
+
+
+</div> <!-- todo -->
+
+
+<!-- RemoveTask function -->
+<script>
+    function remove(taskitem) {
+        const task = taskitem.closest('.nextto2');
+        if (!task){
+            console.log("Task not found");
+        }
+        task.remove();
+    }
+
+    function createtask() {
+        let template = document.getElementById('tasktemplate');
+        let clone = template.content.cloneNode(true);
+        document.getElementById('todosection').appendChild(clone);
+    }
+
+</script>
+    </body>
+</html> 

@@ -1,0 +1,134 @@
+body {
+    background-color: #D9D9D9;
+    font-family: 'Fredoka';
+    height: 100vh;
+    margin: 0;
+    align-items: flex-start;
+    display: flex;
+}
+
+h1 {
+    font-family: 'Fredoka', sans-serif;
+    color: #364958;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 05x;
+    margin-top: 0px;
+    font-size: 64px;
+    
+
+}
+
+.titletext {
+    margin-top: 5px;
+    text-align: left;
+    margin-left: 25px;
+}
+
+h3 {
+    color: #3B6064;
+    font-family: 'Fredoka', sans-serif;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 05x;
+    margin-top: 0px;
+    font-size: 30px;
+    margin-left: 20px;
+}
+
+
+.todo {
+        margin-top: 25px;
+        background-color: #364958BA;
+        border-radius: 8px;
+        width: 450px;
+        height: auto;
+        display: inline;
+        justify-content: center;
+        align-items: center;  
+        color: white;
+        margin-left: 25px;
+        padding-bottom: 50px;
+        overflow: auto;
+        resize: both;
+        min-width: 450px;
+        max-height: 95%;
+        
+    }
+.objectTitle {
+    font-family: 'Fredoka', sans-serif;
+    color: #364958;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 05x;
+    margin-top: 0px;
+    font-size: 64px;
+    padding-left: 25px;
+}
+.nextto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addbutton {
+    background-color: #364958;
+    font-family: 'Fredoka', sans-serif;
+    padding: 5px;
+    border-radius: 500px;
+    color: #D9D9D9;
+    border-color: #364958;
+    border: none;
+    margin-right: 25px;
+    size: 100px;
+    width: 50px;
+    height: 50px;
+    font-size: 15px;
+    margin-top: 10px;
+
+}
+
+.createtaskmodal {
+    background-color: #55828b8f;
+    border-radius: 8px;
+    text-align: center;
+    width: 15%;
+    height: 10%;
+    padding: 20px;
+    margin: auto !important;
+}
+
+.nextto2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+}
+
+.taskinput {
+    margin: 0px;
+    padding: 0px;
+    background: none;
+    border: none;
+    color: #D9D9D9;
+    font-size: 25px;
+    font-family: 'Fredoka';
+
+}
+
+.completebutton {
+    background-color: #364958;
+    font-family: 'Fredoka', sans-serif;
+    padding: 5px;
+    border-radius: 500px;
+    color: #D9D9D9;
+    border-color: #364958;
+    border: none;
+    margin-right: 25px;
+    size: 100px;
+    width: 50px;
+    height: 50px;
+    font-size: 15px;
+    margin-top: 10px;
+
+}
