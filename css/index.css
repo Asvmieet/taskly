@@ -37,6 +37,20 @@ h3 {
     margin-left: 20px;
 }
 
+
+h4 {
+    color: #3B6064;
+    font-family: 'Fredoka', sans-serif;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 05x;
+    margin-top: 10px;
+    font-size: 10px;
+    margin-left: 20px;
+}
+
+
+
 .auth {
 background-color: #3B6064;
 font-family: 'Fredoka', sans-serif;

@@ -208,3 +208,7 @@ h3 {
     margin-right: 50px;
     position: absolute !important; 
 }
+
+.svg-icon-check-todo{
+    margin: 5px;
+}
