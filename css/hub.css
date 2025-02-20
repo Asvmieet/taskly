@@ -42,7 +42,7 @@ h3 {
         background-color: #364958BA;
         border-radius: 8px;
         width: 450px;
-        height: auto;
+        height: 500px;
         display: inline;
         justify-content: center;
         align-items: center;  
@@ -52,10 +52,11 @@ h3 {
         overflow: auto;
         resize: both;
         min-width: 450px;
+        min-height: 100px;
         max-height: 95%;
         
     }
-.objectTitle {
+.todoobjectTitle {
     font-family: 'Fredoka', sans-serif;
     color: #364958;
     margin-bottom: 0px;
@@ -131,4 +132,72 @@ h3 {
     font-size: 15px;
     margin-top: 10px;
 
+}
+
+.notesbg {
+    margin-top: 25px;
+    background-color: #364958BA;
+    border-radius: 8px;
+    width: 450px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+    color: white;
+    padding: 20px;
+    overflow: auto;
+    resize: both;
+    min-width: 450px;
+    max-height: 95%;
+    margin-left: 25px;
+    align-items: flex-start;
+    min-height: 200px;
+}
+
+.notesmodule {
+    margin-top: 50px;
+    background-color: #3649585E;
+    border-radius: 8px;
+    color: white;
+    margin-left: 25px;
+    padding-bottom: 50px;
+    overflow: auto;
+    width: 95%;
+    height: 95%;
+    margin-right: 25px;
+    overflow: auto;
+    padding: 20px;
+    margin: 25px;
+    align-self: center !important;
+
+ 
+}
+
+.notesinput {
+    margin: 0px;
+    padding: 0px;
+    background: none;
+    border: none;
+    color: #D9D9D9;
+    font-size: 25px;
+    font-family: 'Fredoka';
+    width: 100%;
+    height: 100%;
+    text-wrap: wrap;
+    resize: none;
+    
+}
+
+.notesobjectitle {
+    font-family: 'Fredoka', sans-serif;
+    color: #364958;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 05x;
+    margin-top: 0px;
+    font-size: 64px;
+    padding-left: 0px;
+    margin-right: 50px;
+    position: absolute !important; 
 }

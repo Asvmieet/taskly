@@ -17,15 +17,24 @@
 
 <div class="todo" id="todosection">
     <div class="nextto">
-    <h1 class="objectTitle">To-Do</h1>
+    <h1 class="todoobjectTitle">To-Do</h1>
     <button class="addbutton" onclick="createtask()">+</button>
 </div> <!-- nextto -->
 
 
 </div> <!-- todo -->
 
+<div class="notesbg">
+    <h1 class="notesobjectTitle">Notes</h1>
+    <div class="notesmodule">
+ <textarea class="notesinput" placeholder="Jot down a quick note..."></textarea>
+    </div> <!-- notesmodule -->
+</div> <!-- notesbg -->
 
-<!-- RemoveTask function -->
+
+
+
+<!-- Scripts -->
 <script>
     function remove(taskitem) {
         const task = taskitem.closest('.nextto2');
