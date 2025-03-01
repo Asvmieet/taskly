@@ -33,17 +33,37 @@
     </div> <!-- notesmodule -->
 </div> <!-- notesbg -->
 
+<div class="dayviewbg">
+    <h1 class="dayviewobjectTitle">MyView</h1>
+    <div class="dayviewmodule">
+        <h5 class="dayviewquote" id="dayviewquote">"Apples taste like oranges and bananas taste like apples" -Me</h5>
+        <h1 class="dayviewtime" id="dayviewtime">11:59 PM</h1>
+        <h5 class="dayviewdate" id="dayviewdate">2/25/25</h5>
+
+    </div>
+    
+
+</div> <!-- notesbg -->
+
+
+
 
 
 
 <!-- Scripts -->
 <script>
+let timesincecount = -1
+let taskscomplete = 0;
+let ts = 0;
+
     function remove(taskitem) {
         const task = taskitem.closest('.nextto2');
         if (!task){
             console.log("Task not found");
         }
         task.remove();
+        taskscomplete++;
+
     }
 
     function createtask() {
@@ -51,6 +71,53 @@
         let clone = template.content.cloneNode(true);
         document.getElementById('todosection').appendChild(clone);
     }
+
+    function generatequote() {
+fetch('/json/quotes.json')
+  .then(response => response.json())
+  .then(data => {
+    const quotenum = Math.floor(Math.random() * data.length);
+    const quote = data[quotenum].content;
+    const author = data[quotenum].author;
+    document.getElementById('dayviewquote').textContent =  `"${quote}" -${author}`;
+    });
+}
+
+function time() {
+    const date = new Date();
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds();
+    const time = `${hours}:${minutes}`;
+    const day = date.getDate();
+    const month = date.getMonth()  + 1;
+    const year = date.getFullYear();
+    const dateview = `${month}/${day}/${year}`;
+    document.getElementById('dayviewtime').textContent = time;
+    document.getElementById('dayviewdate').textContent = dateview;
+
+    if (timesincecount == -1){
+         ts = 60 - seconds;
+        timesincecount = 1;
+    } 
+
+
+}
+function onemin(){
+
+}
+
+const changeintime = ts * 1000
+
+window.onload = function() {
+    generatequote();
+    time();
+    setInterval(time,changeintime);
+    setInterval(generatequote, 60 * 1000);
+    
+   
+}
+
 
 </script>
     </body>
