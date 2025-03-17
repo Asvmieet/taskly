@@ -7,6 +7,10 @@
 
     <body>
 
+<div class="bodyContent">
+
+<div class="widgits" id="widgits">
+
 <template id="tasktemplate">
     <div class="nextto2">
         <button class="completebutton" onclick="remove(this)"><svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" viewBox="0 0 99 83" fill="none" class="svg-icon-check-todo">
@@ -20,6 +24,7 @@
 <div class="todo" id="todosection">
     <div class="nextto">
     <h1 class="todoobjectTitle">To-Do</h1>
+   
     <button class="addbutton" onclick="createtask()">+</button>
 </div> <!-- nextto -->
 
@@ -39,22 +44,88 @@
         <h5 class="dayviewquote" id="dayviewquote">"Apples taste like oranges and bananas taste like apples" -Me</h5>
         <h1 class="dayviewtime" id="dayviewtime">11:59 PM</h1>
         <h5 class="dayviewdate" id="dayviewdate">2/25/25</h5>
+        <h6 class="dayviewdate" id="goalstext">Complete a task to begin!</h5>
+            <button onclick="startBreak()">Start Break</button>
 
     </div>
     
 
 </div> <!-- notesbg -->
 
+</div> <!-- Widgits -->
 
+<div class="BreakContent" id="BreakContent">
+<h1 class="breakText">You're on break!</h1>
+<h6 class="breakText" id="breakTextTIME">11:59 PM</h6>
+<h6 class="breakText" id="breakTextENDING">Break ends at 11:59 PM</h6>
+
+<button class="breakButton" onclick="endBreak()">End Break Early</button>
+</div> <!-- BreakContent -->
+</div> <!-- BodyContent -->
+
+<div class="sideoptionsmenu" id="goalssection">
+    <div class="nextto">
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none" class="lowermenuicons">
+            <path d="M6.24416 4.74416H4.74416V6.24416V43.7091V45.2091H6.24416H12.4883H13.9883V43.7091V6.24416V4.74416H12.4883H6.24416ZM1.5 6.24416C1.5 3.62405 3.62401 1.5 6.24416 1.5H12.4883C15.1085 1.5 17.2325 3.62405 17.2325 6.24416V43.7091C17.2325 46.3292 15.1085 48.4533 12.4883 48.4533H6.24416C3.62401 48.4533 1.5 46.3292 1.5 43.7091V6.24416Z" stroke="white" stroke-width="3"/>
+            <path d="M37.4651 4.74416H35.9651V6.24416V43.7091V45.2091H37.4651H43.7093H45.2093V43.7091V6.24416V4.74416H43.7093H37.4651ZM32.7209 6.24416C32.7209 3.62405 34.845 1.5 37.4651 1.5H43.7093C46.3294 1.5 48.4534 3.62405 48.4534 6.24416V43.7091C48.4534 46.3292 46.3294 48.4533 43.7093 48.4533H37.4651C34.845 48.4533 32.7209 46.3292 32.7209 43.7091V6.24416Z" stroke="white" stroke-width="3"/>
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="58" height="44" viewBox="0 0 58 44" fill="none" class="lowermenuicons">
+            <path d="M15.2507 0L0 15.2507V10.1242L10.1242 0H15.2507Z" fill="white"/>
+            <path d="M5.43753 43.4998H10.875V37.3116L4.73218 43.4545C4.96305 43.4842 5.1985 43.4998 5.43753 43.4998Z" fill="white"/>
+            <path d="M47.8759 43.4998H47.1248V39.1244L58 28.2491V33.3756L47.8759 43.4998Z" fill="white"/>
+            <path d="M58 20.6882L46.7699 31.9183C46.4114 30.6757 45.7937 29.5428 44.9795 28.5822L58 15.5617V20.6882Z" fill="white"/>
+            <path d="M38.0621 28.9998C39.8344 28.9998 41.4087 29.8477 42.4012 31.1599C43.0907 32.0713 43.4996 33.2066 43.4996 34.4373V43.4997H39.8746V34.4373C39.8746 33.4364 39.063 32.6248 38.0621 32.6248H19.9372C18.9362 32.6248 18.1247 33.4364 18.1247 34.4373V43.4997H14.4998V34.4373C14.4998 34.1618 14.5202 33.891 14.5598 33.6267C14.9117 31.2727 16.7725 29.4116 19.1266 29.06C19.391 29.0205 19.6618 28.9998 19.9372 28.9998H38.0621Z" fill="white"/>
+            <path d="M27.9934 25.3198C26.6078 25.1665 25.3164 24.701 24.1911 23.9952C22.6522 23.0303 21.4239 21.6154 20.6903 19.9351C20.2059 18.8257 19.9373 17.6004 19.9373 16.3124C19.9373 16.0483 19.9486 15.7867 19.9707 15.5283C20.3461 11.1488 23.8361 7.65883 28.2155 7.28346C28.474 7.26131 28.7355 7.25 28.9997 7.25C30.2877 7.25 31.5129 7.51868 32.6225 8.00309C34.3027 8.73668 35.7175 9.96496 36.6825 11.5039C37.3883 12.6292 37.8537 13.9206 38.007 15.3061C38.0433 15.6365 38.0621 15.9723 38.0621 16.3124C38.0621 21.3175 34.0047 25.3749 28.9997 25.3749C28.6596 25.3749 28.3238 25.356 27.9934 25.3198ZM28.9997 21.7499C32.0026 21.7499 34.4372 19.3155 34.4372 16.3124C34.4372 13.3094 32.0026 10.875 28.9997 10.875C25.9967 10.875 23.5622 13.3094 23.5622 16.3124C23.5622 19.3155 25.9967 21.7499 28.9997 21.7499Z" fill="white"/>
+            <path d="M0.433112 40.1923L17.995 22.6308C17.3403 21.4927 16.857 20.2437 16.5804 18.9188L0 35.4991V38.0623C0 38.8185 0.154279 39.5384 0.433112 40.1923Z" fill="white"/>
+            <path d="M35.3182 5.30758C34.1799 4.65288 32.9311 4.16956 31.6062 3.89294L35.4991 0H40.6255L35.3182 5.30758Z" fill="white"/>
+            <path d="M41.0328 12.2801C40.6236 11.0576 40.0331 9.91808 39.2932 8.89345L48.1867 0H52.5621C52.8013 0 53.0366 0.0154418 53.2679 0.0453478L41.0328 12.2801Z" fill="white"/>
+            <path d="M37.8792 25.3748C39.4709 23.815 40.6533 21.839 41.2507 19.6231L57.5668 3.30725C57.8455 3.96141 57.9999 4.68141 57.9999 5.43743V8.00065L40.3376 25.663C39.6104 25.4749 38.8481 25.3748 38.0622 25.3748H37.8792Z" fill="white"/>
+            <path d="M0 27.9381L27.9381 0H22.8117L0 22.8116V27.9381Z" fill="white"/>
+          </svg>
+    
+          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="56" viewBox="0 0 44 56" fill="none" class="lowermenuicons">
+            <path d="M40 16.338V36.57C38.8232 35.8896 37.4572 35.4999 36 35.4999C31.5817 35.4999 28 39.0816 28 43.5C28 47.918 31.5817 51.5 36 51.5C40.4184 51.5 44 47.918 44 43.5V3.20273C44 0.989808 41.8076 -0.55514 39.7236 0.189128L14.1237 9.33201C12.8502 9.78685 12 10.9932 12 12.3456V40.57C10.8233 39.8896 9.45716 39.5 8 39.5C3.58172 39.5 0 43.0816 0 47.5C0 51.918 3.58172 55.5 8 55.5C12.4183 55.5 16 51.918 16 47.5V24.9095L40 16.338ZM40 12.0906L16 20.662V12.9093L40 4.33793V12.0906ZM36 39.5C38.2092 39.5 40 41.2908 40 43.5C40 45.7092 38.2092 47.5 36 47.5C33.7908 47.5 32 45.7092 32 43.5C32 41.2908 33.7908 39.5 36 39.5ZM8 43.5C10.2091 43.5 12 45.2908 12 47.5C12 49.7092 10.2091 51.5 8 51.5C5.79088 51.5 4 49.7092 4 47.5C4 45.2908 5.79088 43.5 8 43.5Z" fill="white"/>
+          </svg>
+    
+          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="56" viewBox="0 0 31 34" fill="none" class="lowermenuicons">
+            <path d="M1.40577 22.0693C4.3167 19.2684 4.3167 14.6095 1.40577 11.8083L0.878906 11.3017C1.48302 9.57407 2.35698 7.97995 3.44808 6.57414L4.15615 6.78346C8.06277 7.93758 12.1396 5.58485 13.0947 1.62447L13.3446 0.588144C14.1894 0.445748 15.0562 0.371704 15.9394 0.371704C16.823 0.371704 17.6898 0.445747 18.5346 0.588178L18.7845 1.62447C19.7396 5.58485 23.8164 7.93758 27.723 6.78346L28.4311 6.57414C29.5222 7.97995 30.3961 9.57407 31.0002 11.3017L30.4734 11.8083C27.5625 14.6095 27.5625 19.2684 30.4734 22.0693L30.9999 22.5762C30.3961 24.3038 29.5222 25.898 28.4311 27.3038L27.723 27.0944C23.8164 25.9403 19.7396 28.2931 18.7845 32.2531L18.5346 33.2897C17.6898 33.4321 16.823 33.5062 15.9394 33.5062C15.0562 33.5062 14.1894 33.4321 13.3446 33.2897L13.0947 32.2531C12.1396 28.2931 8.06277 25.9403 4.15615 27.0944L3.44808 27.3038C2.35698 25.898 1.48302 24.3038 0.878906 22.5762L1.40577 22.0693ZM11.5728 16.9388C11.5728 19.4343 13.5279 21.4574 15.9394 21.4574C18.3512 21.4574 20.3063 19.4343 20.3063 16.9388C20.3063 14.4436 18.3512 12.4206 15.9394 12.4206C13.5279 12.4206 11.5728 14.4436 11.5728 16.9388Z" fill="white"/>
+          </svg>
+    </div>
 
 
 
 
 <!-- Scripts -->
 <script>
+
 let timesincecount = -1
-let taskscomplete = 0;
 let ts = 0;
+let taskscomplete = 0;    
+let metgoals = 0
+function updateGoals() {
+
+    if (metgoals == 0){
+
+    fetch('/json/settings.json')
+        .then(response=>response.json())
+        .then(data => {
+        const goals = data.options_goals;
+           
+        taskscomplete ++;
+        const remainingTasks = goals - taskscomplete
+        if (remainingTasks == 0){
+            metgoals = 1;
+            document.getElementById('goalstext').textContent = `You have met your goal of ${goals} tasks!`;
+        } else {
+        document.getElementById('goalstext').textContent = `There are ${remainingTasks} tasks left!`;
+        }
+        })
+        .catch(error => {
+            document.getElementById('goalstext').textContent = `Error displaying goals: ${error}`
+        });
+    }
+    }
+
 
     function remove(taskitem) {
         const task = taskitem.closest('.nextto2');
@@ -62,8 +133,7 @@ let ts = 0;
             console.log("Task not found");
         }
         task.remove();
-        taskscomplete++;
-
+        updateGoals();
     }
 
     function createtask() {
@@ -95,6 +165,7 @@ function time() {
     const dateview = `${month}/${day}/${year}`;
     document.getElementById('dayviewtime').textContent = time;
     document.getElementById('dayviewdate').textContent = dateview;
+    document.getElementById('breakTextTIME').textContent = time;
 
     if (timesincecount == -1){
          ts = 60 - seconds;
@@ -103,21 +174,146 @@ function time() {
 
 
 }
-function onemin(){
 
+
+var inautobreak = 1
+
+function startBreak() {
+    fetch('/json/settings.json')
+        .then(response=>response.json())
+        .then(data=> {
+        let breakLength = data.breaks_duration
+        const date2 = new Date();
+        date2.setMinutes(date2.getMinutes() + breakLength );
+        const hours2 = date2.getHours().toString().padStart(2, '0');
+        const minutes2 = date2.getMinutes().toString().padStart(2, '0');
+        const seconds2 = date2.getSeconds();
+        const time2 = `Break ends at: ${hours2}:${minutes2}.`;
+            var items = document.getElementById('widgits')
+            var breakcontent = document.getElementById('BreakContent')
+            var endtime = document.getElementById('breakTextENDING')
+                if (items && breakcontent){
+
+                    items.style.display = "none";
+                    breakcontent.style.display = "flex";
+                    breakcontent.style.flexDirection = "column";
+                    breakcontent.style.alignItems = "center";
+                    endtime.textContent = time2
+
+
+                } else {
+                    document.getElementById('goalstext').textContent = "ERR: Break screen is unable to load. Widgits and or BreakContent unable to load. Refresh the page to try again."
+                }
+            
+            
+        })
+} 
+
+
+function endBreak() {
+   
+            var items = document.getElementById('widgits')
+            var breakcontent = document.getElementById('BreakContent')
+                if (items && breakcontent){
+
+                    items.style.display = "flex";
+                    breakcontent.style.display = "none";
+                    inautobreak = 0;
+                } else {
+                    document.getElementById('breakTextENDING').textContent = "ERR: Break screen is unable to show. Widgits and or BreakContent unable to load. Refresh the page to try again."
+                }
+            
+            
+       
+} 
+
+
+
+var breakLength = 3000
+var breakFrequency = 5000
+
+function startAutoBreak() { 
+    fetch('/json/settings.json')
+        .then(response=>response.json())
+        .then(data=> {
+
+    if (inautobreak == 1){
+        return;
+    } else {
+inautobreak = 0;
+startBreak();
+autoStopBreak = setTimeout(() => {
+    endBreak();
+    autoUnpause = setTimeout(startAutoBreak, breakFrequency);
+}, breakLength);
 }
+});
+}
+
+
+      
+
 
 const changeintime = ts * 1000
 
 window.onload = function() {
+    fetch('/json/settings.json')
+        .then(response=>response.json())
+        .then(data=> {
     generatequote();
     time();
     setInterval(time,changeintime);
     setInterval(generatequote, 60 * 1000);
+     breakLength = data.breaks_duration * 1000
+     breakFrequency = data.breaks_fequency * 1000
+    /// autoBreakEnabled = setInterval(startAutoBreak, breakFrequency);
+
     
-   
+        });
+
 }
 
+function setColors(style) {
+ if (style == "clasic"){
+    fetch('/json/lightModeColors.json')
+        .then(response=>response.json())
+        .then(data=> {
+    document.body.style.backgroundColor = data.bg;
+    document.body.style.h1 = data.h1
+  document.body.style.h5 = data.h5
+   document.body.style.h6 = data.h6
+   document.body.style.h3 = data.h3
+   document.body.style.setProperty('--widgit-bg', data.widgitBG)
+    document.body.style.setProperty('--widgit-bg2', data.widgitBG2)
+    document.body.style.setProperty('--buttons', data.buttons)
+   document.body.style.setProperty('--placeHolder', data.placeHolders) 
+   document.body.style.setProperty('--LMIcons', data.LMIcons)
+        });
+} else if (style == "dark"){
+    document.body.style.backgroundColor = "black";
+    document.body.style.color = "white";
+
+}
+}
+
+
+window.onload = function() {
+    fetch('/json/settings.json')
+        .then(response=>response.json())
+        .then(data=> {
+    generatequote();
+    time();
+    setInterval(time,changeintime);
+    setInterval(generatequote, 60 * 1000);
+     breakLength = data.breaks_duration * 1000
+     breakFrequency = data.breaks_fequency * 1000
+    /// autoBreakEnabled = setInterval(startAutoBreak, breakFrequency);
+
+    
+        });
+        setColors("clasic");
+
+}
 
 </script>
     </body>

@@ -1,0 +1,17 @@
+
+    {
+        "design_bg": "#000",
+        "design_buttons": "#000",
+        "design_text": "#000",
+        "design_icons": "#000",
+        "design_phototheme": "#000",
+        "breaks_enabled": true,
+        "breaks_time": 3,
+        "breaks_frequency": 10,
+        "breaks_duration": 5,
+        "music_category": "pop",
+        "options_goals": 5
+}
+    
+
+
