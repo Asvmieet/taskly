@@ -256,48 +256,56 @@ autoStopBreak = setTimeout(() => {
 
 const changeintime = ts * 1000
 
-window.onload = function() {
-    fetch('/json/settings.json')
-        .then(response=>response.json())
-        .then(data=> {
-    generatequote();
-    time();
-    setInterval(time,changeintime);
-    setInterval(generatequote, 60 * 1000);
-     breakLength = data.breaks_duration * 1000
-     breakFrequency = data.breaks_fequency * 1000
-    /// autoBreakEnabled = setInterval(startAutoBreak, breakFrequency);
-
-    
-        });
-
-}
 
 function setColors(style) {
+    try{
  if (style == "clasic"){
     fetch('/json/lightModeColors.json')
         .then(response=>response.json())
         .then(data=> {
-    document.body.style.backgroundColor = data.bg;
-    document.body.style.h1 = data.h1
-  document.body.style.h5 = data.h5
-   document.body.style.h6 = data.h6
-   document.body.style.h3 = data.h3
+            document.body.style.backgroundColor = data.bg;
+    document.querySelector('h1').style.color = data.h1
+  document.querySelector('h5').style.color = data.h5
+   document.querySelector('h6').style.color = data.color
+   document.querySelector('h3').style.color = data.color
    document.body.style.setProperty('--widgit-bg', data.widgitBG)
     document.body.style.setProperty('--widgit-bg2', data.widgitBG2)
     document.body.style.setProperty('--buttons', data.buttons)
    document.body.style.setProperty('--placeHolder', data.placeHolders) 
    document.body.style.setProperty('--LMIcons', data.LMIcons)
         });
-} else if (style == "dark"){
-    document.body.style.backgroundColor = "black";
-    document.body.style.color = "white";
+} else {
+    fetch('/json/darkModeColors.json')
+        .then(response=>response.json())
+        .then(data2=> {
+    document.body.style.setProperty('background-color', data2.bg, 'important');
+    document.body.style.setProperty('background-size', '0%', 'important');
 
-}
-}
+    document.querySelectorAll('h1').forEach(h1 => h1.style.color = data2.h1)
+  document.querySelectorAll('h5').forEach(h5 => h5.style.color = data2.h5)
+   document.querySelectorAll('h6').forEach(h6 => h6.style.color = data2.h6)
+   document.body.style.setProperty('--widgit-bg', data2.widgitBG)
+    document.body.style.setProperty('--widgit-bg2', data2.widgitBG2)
+    document.body.style.setProperty('--buttons', data2.buttons)
+   document.body.style.setProperty('--placeHolder', data2.placeHolders) 
+   document.body.style.setProperty('--LMIcons', data2.LMIcons)
+   if (!document.querySelector('h2')){
+       console.log("H2 not found")
+   }
 
+   document.getElementById('goalstext').textContent = "Set to dark mode."
+
+        });
+}
+    } catch(errorSC){
+        document.getElementById('goalstext').textContent = errorSC
+
+    }
+}
 
 window.onload = function() {
+    setColors('dark');
+
     fetch('/json/settings.json')
         .then(response=>response.json())
         .then(data=> {
@@ -311,9 +319,11 @@ window.onload = function() {
 
     
         });
-        setColors("clasic");
 
 }
+
+
+
 
 </script>
     </body>
