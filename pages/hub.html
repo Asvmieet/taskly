@@ -23,7 +23,7 @@
 
 <div class="todo" id="todosection">
     <div class="nextto">
-    <h1 class="todoobjectTitle">To-Do</h1>
+    <h1 class="todoobjectTitle" onclick="clearTasks()">To-Do</h1>
    
     <button class="addbutton" onclick="createtask()">+</button>
 </div> <!-- nextto -->
@@ -46,6 +46,9 @@
         <h5 class="dayviewdate" id="dayviewdate">2/25/25</h5>
         <h6 class="dayviewdate" id="goalstext">Complete a task to begin!</h5>
             <button onclick="startBreak()">Start Break</button>
+            <button onclick="clearTasks()">Clear tasks</button>
+            <button onclick="window.location.href = '../index.html'">Home</button>
+
 
     </div>
     
@@ -62,6 +65,7 @@
 <button class="breakButton" onclick="endBreak()">End Break Early</button>
 </div> <!-- BreakContent -->
 </div> <!-- BodyContent -->
+
 
 <div class="sideoptionsmenu" id="goalssection">
     <div class="nextto">
@@ -102,8 +106,10 @@ let timesincecount = -1
 let ts = 0;
 let taskscomplete = 0;    
 let metgoals = 0
-function updateGoals() {
+var createdTasks = 0
 
+function updateGoals() {
+    
     if (metgoals == 0){
 
     fetch('/json/settings.json')
@@ -127,6 +133,21 @@ function updateGoals() {
     }
 
 
+    function clearTasks() {
+        if (createdTasks == 0){
+            console.log("No tasks to clear");
+        } else {
+        for (let i = 0; i<createdTasks;i++ ){
+        const task = document.getElementById('todosection').querySelector('.nextto2');
+        if (!task){
+            console.log("Task not found");
+        }
+        task.remove();
+    }
+    createdTasks = 0;
+}
+    }
+
     function remove(taskitem) {
         const task = taskitem.closest('.nextto2');
         if (!task){
@@ -136,10 +157,13 @@ function updateGoals() {
         updateGoals();
     }
 
+
+
     function createtask() {
         let template = document.getElementById('tasktemplate');
         let clone = template.content.cloneNode(true);
         document.getElementById('todosection').appendChild(clone);
+        createdTasks++
     }
 
     function generatequote() {

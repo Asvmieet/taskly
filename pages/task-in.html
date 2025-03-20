@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="/css/taskin.css">
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+
+<div class="bodyContent">
+
+<h1>Task In</h1>
+<textarea class="notesinput" id="Username" placeholder="Username"></textarea>
+<textarea class="notesinput" id="Password" placeholder="Password"></textarea>
+<button class="auth1" onclick="login()">Go</button>
+
+
+</div>
+
+
+<script>
+function login(){
+    var username = document.getElementById("Username").value;
+    var password = document.getElementById("Password").value;
+    if(username == "admin" && password == "admin"){
+        window.location.href = "/pages/hub.html";
+}
+
+}
+</script>
+
+    </body>
+</html> 
