@@ -13,17 +13,32 @@
 <textarea class="notesinput" id="Username" placeholder="Username"></textarea>
 <textarea class="notesinput" id="Password" placeholder="Password"></textarea>
 <button class="auth1" onclick="login()">Go</button>
+<button class="auth1" onclick="createUser()">Create User</button>
 
 
 </div>
 
 
 <script>
+    import userSchema from '../Database/schema/taskin.js'
 function login(){
     var username = document.getElementById("Username").value;
     var password = document.getElementById("Password").value;
     if(username == "admin" && password == "admin"){
         window.location.href = "/pages/hub.html";
+}
+}
+async function createUser(){
+    var username = document.getElementById("Username").value;
+    var password = document.getElementById("Password").value;
+const newuser = new userSchema({
+    username: username,
+    password: password
+})
+try{
+await newuser.save()
+} catch (err){
+    console.log(`An error occured while trying to create a user.: ${err}`)
 }
 
 }
