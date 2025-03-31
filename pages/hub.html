@@ -17,9 +17,16 @@
             <path d="M35.0814 61.8272L14.0379 40.7838C10.8266 37.5724 5.6199 37.5724 2.40853 40.7838C-0.802842 43.9952 -0.802842 49.2018 2.40853 52.4132L29.8193 79.8239C33.2385 83.2431 38.8556 82.9883 41.9512 79.2736L96.7727 13.4878C99.6802 9.99889 99.2088 4.81361 95.7198 1.90617C92.2309 -1.00126 87.0457 -0.529874 84.1382 2.95905L35.0814 61.8272Z" fill="white"/>
           </svg></button>
         <input type="text" class="taskinput" placeholder="Task Name">
+        <button class="lowermenubuttonadditions" onclick="pinTask(this)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 61 61" fill="none">
+            <path d="M42.4123 2.64332C38.144 -1.62506 30.969 -0.578252 28.0981 4.73175L18.9134 21.7195L4.90095 27.3032C3.96132 27.6776 3.27289 28.4994 3.0689 29.49C2.86484 30.4807 3.17258 31.5076 3.88777 32.2229L13.7899 42.125L0.881356 55.0337L0 60.1667L5.13393 59.2862L18.0425 46.3776L27.9439 56.2792C28.6586 56.9937 29.6846 57.3016 30.6748 57.0983C31.6649 56.8951 32.4867 56.2083 32.8621 55.2695L38.472 41.2448L55.4373 32.0689C60.7465 29.1975 61.7923 22.0233 57.5241 17.7553L42.4123 2.64332ZM33.3884 7.59202C34.3454 5.82203 36.737 5.4731 38.1598 6.89589L53.2718 22.0079C54.6946 23.4306 54.3457 25.8219 52.576 26.7791L34.6537 36.4727C34.0351 36.8073 33.5534 37.348 33.2923 38.0009L28.9718 48.8018L11.3696 31.1995L22.1529 26.9026C22.8075 26.6417 23.3498 26.1592 23.685 25.5393L33.3884 7.59202Z" fill="white"/>
+        </svg>
+        </button>
+        
     </div>
     
 </template>
+
 
 <div class="todo" id="todosection">
     <div class="nextto">
@@ -27,6 +34,10 @@
    
     <button class="addbutton" onclick="createtask()">+</button>
 </div> <!-- nextto -->
+<div id="pinnedTasks" class="pinnedTasks">
+
+</div>
+
 
 
 </div> <!-- todo -->
@@ -34,7 +45,7 @@
 <div class="notesbg">
     <h1 class="notesobjectTitle">Notes</h1>
     <div class="notesmodule">
- <textarea class="notesinput" placeholder="Jot down a quick note..."></textarea>
+ <textarea class="notesinput" id="notesinput" placeholder="Jot down a quick note..."></textarea>
     </div> <!-- notesmodule -->
 </div> <!-- notesbg -->
 
@@ -47,6 +58,10 @@
         <h6 class="dayviewdate" id="goalstext">Complete a task to begin!</h5>
             <button onclick="startBreak()">Start Break</button>
             <button onclick="clearTasks()">Clear tasks</button>
+            <button onclick="getTasks()">getTasks</button>
+            <button onclick="saveData()">Save Data</button>
+            <button onclick="changeTheme()">Change Theme</button>
+            <button onclick="setData()">Set Data</button>
             <button onclick="window.location.href = '../index.html'">Home</button>
 
 
@@ -69,10 +84,13 @@
 
 <div class="sideoptionsmenu" id="goalssection">
     <div class="nextto">
+        <button onclick="startBreak()" class="lowermenubuttonadditions">
         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none" class="lowermenuicons">
             <path d="M6.24416 4.74416H4.74416V6.24416V43.7091V45.2091H6.24416H12.4883H13.9883V43.7091V6.24416V4.74416H12.4883H6.24416ZM1.5 6.24416C1.5 3.62405 3.62401 1.5 6.24416 1.5H12.4883C15.1085 1.5 17.2325 3.62405 17.2325 6.24416V43.7091C17.2325 46.3292 15.1085 48.4533 12.4883 48.4533H6.24416C3.62401 48.4533 1.5 46.3292 1.5 43.7091V6.24416Z" stroke="white" stroke-width="3"/>
             <path d="M37.4651 4.74416H35.9651V6.24416V43.7091V45.2091H37.4651H43.7093H45.2093V43.7091V6.24416V4.74416H43.7093H37.4651ZM32.7209 6.24416C32.7209 3.62405 34.845 1.5 37.4651 1.5H43.7093C46.3294 1.5 48.4534 3.62405 48.4534 6.24416V43.7091C48.4534 46.3292 46.3294 48.4533 43.7093 48.4533H37.4651C34.845 48.4533 32.7209 46.3292 32.7209 43.7091V6.24416Z" stroke="white" stroke-width="3"/>
           </svg>
+          </button>
+          <button class="lowermenubuttonadditions" onclick="changeTheme()">
           <svg xmlns="http://www.w3.org/2000/svg" width="58" height="44" viewBox="0 0 58 44" fill="none" class="lowermenuicons">
             <path d="M15.2507 0L0 15.2507V10.1242L10.1242 0H15.2507Z" fill="white"/>
             <path d="M5.43753 43.4998H10.875V37.3116L4.73218 43.4545C4.96305 43.4842 5.1985 43.4998 5.43753 43.4998Z" fill="white"/>
@@ -86,7 +104,10 @@
             <path d="M37.8792 25.3748C39.4709 23.815 40.6533 21.839 41.2507 19.6231L57.5668 3.30725C57.8455 3.96141 57.9999 4.68141 57.9999 5.43743V8.00065L40.3376 25.663C39.6104 25.4749 38.8481 25.3748 38.0622 25.3748H37.8792Z" fill="white"/>
             <path d="M0 27.9381L27.9381 0H22.8117L0 22.8116V27.9381Z" fill="white"/>
           </svg>
+        </button>
     
+
+
           <svg xmlns="http://www.w3.org/2000/svg" width="44" height="56" viewBox="0 0 44 56" fill="none" class="lowermenuicons">
             <path d="M40 16.338V36.57C38.8232 35.8896 37.4572 35.4999 36 35.4999C31.5817 35.4999 28 39.0816 28 43.5C28 47.918 31.5817 51.5 36 51.5C40.4184 51.5 44 47.918 44 43.5V3.20273C44 0.989808 41.8076 -0.55514 39.7236 0.189128L14.1237 9.33201C12.8502 9.78685 12 10.9932 12 12.3456V40.57C10.8233 39.8896 9.45716 39.5 8 39.5C3.58172 39.5 0 43.0816 0 47.5C0 51.918 3.58172 55.5 8 55.5C12.4183 55.5 16 51.918 16 47.5V24.9095L40 16.338ZM40 12.0906L16 20.662V12.9093L40 4.33793V12.0906ZM36 39.5C38.2092 39.5 40 41.2908 40 43.5C40 45.7092 38.2092 47.5 36 47.5C33.7908 47.5 32 45.7092 32 43.5C32 41.2908 33.7908 39.5 36 39.5ZM8 43.5C10.2091 43.5 12 45.2908 12 47.5C12 49.7092 10.2091 51.5 8 51.5C5.79088 51.5 4 49.7092 4 47.5C4 45.2908 5.79088 43.5 8 43.5Z" fill="white"/>
           </svg>
@@ -102,12 +123,16 @@
 <!-- Scripts -->
 <script>
 
+function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+
+  }
+
 let timesincecount = -1
 let ts = 0;
 let taskscomplete = 0;    
 let metgoals = 0
 var createdTasks = 0
-
 function updateGoals() {
     
     if (metgoals == 0){
@@ -118,12 +143,21 @@ function updateGoals() {
         const goals = data.options_goals;
            
         taskscomplete ++;
-        const remainingTasks = goals - taskscomplete
-        if (remainingTasks == 0){
-            metgoals = 1;
-            document.getElementById('goalstext').textContent = `You have met your goal of ${goals} tasks!`;
+        let remainingTasks = goals - taskscomplete
+        console.log(remainingTasks)
+        if (remainingTasks === 0){
+            metgoals = 0;
+            document.getElementById('goalstext').textContent = `You have met your goal of ${goals} tasks! Complete another task to restart your goal!`;
+            
         } else {
         document.getElementById('goalstext').textContent = `There are ${remainingTasks} tasks left!`;
+        }
+        if (remainingTasks < 0){
+            taskscomplete = 0
+            remainingTasks = 0
+            remainingTasks = goals - taskscomplete + 1
+            updateGoals();
+
         }
         })
         .catch(error => {
@@ -166,11 +200,21 @@ function updateGoals() {
         createdTasks++
     }
 
+    function createtaskPreset(text) {
+        let template = document.getElementById('tasktemplate');
+        let clone = template.content.cloneNode(true);
+       let textbox = clone.querySelector('.taskinput')
+       textbox.value = text
+        document.getElementById('todosection').appendChild(clone);
+        createdTasks++
+    
+    }
+
     function generatequote() {
 fetch('/json/quotes.json')
   .then(response => response.json())
   .then(data => {
-    const quotenum = Math.floor(Math.random() * data.length);
+    const quotenum = Math.floor(Math.random() * data.length); // this generates a random number between 1 and the number of quotes there are
     const quote = data[quotenum].content;
     const author = data[quotenum].author;
     document.getElementById('dayviewquote').textContent =  `"${quote}" -${author}`;
@@ -202,6 +246,18 @@ function time() {
 
 var inautobreak = 1
 
+
+
+  function pinTask(task){
+    const pinnedTask = task.closest('.nextto2');
+    const pinnedTaskDiv = document.getElementById('pinnedTasks');
+    if (!task){
+            console.log("Task not found");
+        }
+    pinnedTaskDiv.appendChild(pinnedTask);
+    pinnedTask.querySelector('.lowermenubuttonadditions').remove();
+  }
+
 function startBreak() {
     fetch('/json/settings.json')
         .then(response=>response.json())
@@ -216,6 +272,10 @@ function startBreak() {
             var items = document.getElementById('widgits')
             var breakcontent = document.getElementById('BreakContent')
             var endtime = document.getElementById('breakTextENDING')
+            var breaktime = breakLength * 60000
+            wait(breaktime).then(() => {
+                endBreak();
+            });
                 if (items && breakcontent){
 
                     items.style.display = "none";
@@ -279,30 +339,59 @@ autoStopBreak = setTimeout(() => {
 
 
 const changeintime = ts * 1000
+let currenttheme = "clasic"
 
+function changeTheme() {
+if (currenttheme == "dark"){
+    setColors("clasic")
+    currenttheme = "clasic"
+
+} else if (currenttheme == "clasic"){
+    setColors("dark")
+    currenttheme = "dark"
+
+
+}
+
+}
 
 function setColors(style) {
     try{
  if (style == "clasic"){
-    fetch('/json/lightModeColors.json')
+    console.log("SETCOLORS: Started Clasic");
+
+    try{
+        console.log("SETCOLORS: TRY | Started Clasic TRY");
+
+    currenttheme = "clasic"
+
+    fetch('../json/lightModeColors.json')
         .then(response=>response.json())
         .then(data=> {
-            document.body.style.backgroundColor = data.bg;
-    document.querySelector('h1').style.color = data.h1
-  document.querySelector('h5').style.color = data.h5
-   document.querySelector('h6').style.color = data.color
-   document.querySelector('h3').style.color = data.color
+            console.log("SETCOLORS: FETCH | Started Clasic FETCH");
+
+    document.body.style.setProperty('background-size', '100%', 'important');
+    document.body.style.setProperty('background-color', null, 'important');
+    document.querySelectorAll('h1').forEach(h1 => h1.style.color = data.h1)
+  document.querySelectorAll('h5').forEach(h5 => h5.style.color = data.h5)
+   document.querySelectorAll('h6').forEach(h6 => h6.style.color = data.h6)
    document.body.style.setProperty('--widgit-bg', data.widgitBG)
     document.body.style.setProperty('--widgit-bg2', data.widgitBG2)
     document.body.style.setProperty('--buttons', data.buttons)
    document.body.style.setProperty('--placeHolder', data.placeHolders) 
    document.body.style.setProperty('--LMIcons', data.LMIcons)
+   console.log("SETCOLORS: SET | Set to clasic");
         });
+    }catch(err){
+        console.log(`SETCOLORS: Clasic ERR: ${err}`);
+
+    }
 } else {
     fetch('/json/darkModeColors.json')
         .then(response=>response.json())
         .then(data2=> {
-    document.body.style.setProperty('background-color', data2.bg, 'important');
+            currenttheme = "dark"
+    document.body.style.setProperty('background-color', data2.bg);
     document.body.style.setProperty('background-size', '0%', 'important');
 
     document.querySelectorAll('h1').forEach(h1 => h1.style.color = data2.h1)
@@ -313,29 +402,77 @@ function setColors(style) {
     document.body.style.setProperty('--buttons', data2.buttons)
    document.body.style.setProperty('--placeHolder', data2.placeHolders) 
    document.body.style.setProperty('--LMIcons', data2.LMIcons)
+   console.log("SETCOLORS: Set to darkmode");
    if (!document.querySelector('h2')){
        console.log("H2 not found")
    }
 
-   document.getElementById('goalstext').textContent = "Set to dark mode."
+   console.log("Set to dark mode.")
 
         });
 }
     } catch(errorSC){
-        document.getElementById('goalstext').textContent = errorSC
+        console.log(`Error setting colors: ${errorSC}`);
+        
 
     }
 }
 
-window.onload = function() {
-    setColors('dark');
+function getData(){
 
+if (!localStorage.getItem('mytasklyData')){
+    let blankdata = {
+    tasks: [],
+    notes: '',
+    theme: 'light',
+    DATAgoals: 0,
+    completedTasks: 0
+
+}
+    console.log('No TasklyData found.')
+    return blankdata;
+}
+
+localStorage.getItem('mytasklyData');
+    const tasklyDataGET = JSON.parse(localStorage.getItem("mytasklyData"));
+return tasklyDataGET;  
+
+}
+
+function setData(){ // NOT FINISHED
+    try{
+
+    const dataPUT = getData();
+
+    const tasksarrayPUT = dataPUT.tasks;
+    const notesPUT = dataPUT.notes;
+    const themePUT = dataPUT.theme
+    taskscomplete = dataPUT.completedTasks + 1;
+
+    for(let i = 0; i<tasksarrayPUT.length; i++){
+  createtaskPreset(tasksarrayPUT[i]);
+    }
+    document.getElementById('notesinput').value = notesPUT;
+        setColors(themePUT);
+
+} catch(err){
+    createtaskPreset(`ERR: ${err}`)
+  
+
+}
+}
+
+
+window.onload = function() {
+    setColors('clasic');
+    setData();
     fetch('/json/settings.json')
         .then(response=>response.json())
         .then(data=> {
     generatequote();
     time();
     setInterval(time,changeintime);
+    setInterval(saveData,changeintime)
     setInterval(generatequote, 60 * 1000);
      breakLength = data.breaks_duration * 1000
      breakFrequency = data.breaks_fequency * 1000
@@ -348,7 +485,41 @@ window.onload = function() {
 
 
 
+function getTasks(){
+    let tasks = []
+    const tasksList = document.querySelectorAll('.nextto2');
+
+    tasksList.forEach(taskList => {
+        const taskinput = taskList.querySelector('.taskinput');
+        if (taskinput){
+            tasks.push(taskinput.value);
+        }
+    })
+    return tasks;
+}
+
+function saveData(){
+const taskData = getTasks();
+const noteData = document.querySelector('.notesinput').value;
+
+
+const mytasklyData = {
+    tasks: taskData,
+    notes: noteData,
+    theme: currenttheme,
+    completedTasks: taskscomplete
+
+
+}
+
+
+localStorage.setItem('mytasklyData', JSON.stringify(mytasklyData));
+    const tasklyData = JSON.parse(localStorage.getItem("mytasklyData"));
+  
+}
+
 
 </script>
     </body>
 </html> 
+

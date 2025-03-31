@@ -15,8 +15,8 @@ body {
     justify-content: center;
     flex-direction: row;
     display: flex;
-    background-image: url("../Backgrounds/PaintStrokes/PS_1.jpg");
-    background-size: 100%;
+    background-image: url("../Backgrounds/PaintStrokes/PS_2.jpg");
+    background-size: cover;
 
     
 }
@@ -479,28 +479,20 @@ flex-wrap: wrap;
         margin-top: 7px !important;
         margin-bottom: 7px !important;
     }
-    .lowermenubuttonadditions{
-      background-color: transparent;
-      border: none;
+
+    .auth1 {
+        background-color: #3B6064;
+        font-family: 'Fredoka', sans-serif;
+        padding: 5px;
+        border-radius: 8px;
+        color: #55828B;
+        border-color: #364958;
+        border: none;
+        margin-left: 5px;
+        padding: 10px 15px;
+        font-size: 15px;
+        margin-left: 10px;
+        margin-top: 10px;
+    
+        
         }
-
-        .settingsModal{
-            margin-top: 50px;
-            background-color: var(--widgitBG2);
-            border-radius: 8px;
-            color: var(--LMIcons);
-            position: fixed;
-            left: 0;
-            right: 0;
-            overflow: auto;
-            width: 100%;
-            height: 100%;
-            margin-right: 25px;
-            padding: 20px;
-            margin: 25px;
-            align-self: center !important;
-
-        }
-
-
-  

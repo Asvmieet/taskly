@@ -3,7 +3,7 @@
         "breaks_enabled": true,
         "breaks_time": 3,
         "breaks_frequency": 10,
-        "breaks_duration": 5,
+        "breaks_duration": 0.5,
         "music_category": "pop",
         "options_goals": 5
 }

@@ -1,42 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="/css/taskin.css">
+        <link rel="stylesheet" href="/css/settings.css">
         <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
     </head>
 
     <body>
-<script src="../js/savedata.js"></script>
+
 <div class="bodyContent">
 
-<h1>Task In</h1>
+<h1>Configure Taskly</h1>
+
 <textarea class="notesinput" id="Username" placeholder="Username"></textarea>
 <textarea class="notesinput" id="Password" placeholder="Password"></textarea>
-<button class="auth1" onclick="login()">Go</button>
-<button class="auth1" onclick="saveData()">Create User</button>
+<button class="auth1" onclick="edit()">Go</button>
 
 
 </div>
 
 
 <script>
-function login(){
+function edit(){
     var username = document.getElementById("Username").value;
     var password = document.getElementById("Password").value;
     if(username == "admin" && password == "admin"){
-        const tasklyData = JSON.parse(localStorage.getItem("mytasklyData"));
-        
-        console.log(tasklyData);
+        window.location.href = "/pages/hub.html";
 }
 }
-function setData(){
-    var username = document.getElementById("Username").value;
-    var password = document.getElementById("Password").value;
-    if(username == "admin" && password == "admin"){
-       saveData();
-}
-}
-
 </script>
 
     </body>
