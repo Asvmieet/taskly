@@ -232,6 +232,7 @@ h3 {
     height: 100%;
     text-wrap: wrap;
     resize: none;
+    margin-left: 25px;
     
 }
 

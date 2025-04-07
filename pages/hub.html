@@ -58,21 +58,19 @@
         <h1 class="dayviewtime" id="dayviewtime">11:59 PM</h1>
         <h5 class="dayviewdate" id="dayviewdate">2/25/25</h5>
         <h6 class="dayviewdate" id="goalstext">Complete a task to begin!</h5>
-            <button onclick="startBreak()">Start Break</button>
-            <button onclick="clearTasks()">Clear tasks</button>
-            <button onclick="getTasks()">getTasks</button>
-            <button onclick="saveData()">Save Data</button>
-            <button onclick="changeTheme()">Change Theme</button>
-            <button onclick="setData()">Set Data</button>
-            <button onclick="setSettings()">Set Data</button>
-
-            <button onclick="window.location.href = '../index.html'">Home</button>
-
 
     </div>
     
 
 </div> <!-- notesbg -->
+
+<div class="treebg">
+        <h1 class="dayviewobjectTitle" id="tasklyTreeTitle">TasklyTree</h1>
+       
+
+    <h5 class="dayviewquote" id="tasklyTreeMessages">"Im a growing tree!</h5>
+   <img src="../Assets/1.png" height="80%" width="80%" class="treeimg">
+</div> <!-- treebg -->
 
 </div> <!-- Widgits -->
 
@@ -112,13 +110,14 @@
     
 
 
-          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="56" viewBox="0 0 44 56" fill="none" class="lowermenuicons">
-            <path d="M40 16.338V36.57C38.8232 35.8896 37.4572 35.4999 36 35.4999C31.5817 35.4999 28 39.0816 28 43.5C28 47.918 31.5817 51.5 36 51.5C40.4184 51.5 44 47.918 44 43.5V3.20273C44 0.989808 41.8076 -0.55514 39.7236 0.189128L14.1237 9.33201C12.8502 9.78685 12 10.9932 12 12.3456V40.57C10.8233 39.8896 9.45716 39.5 8 39.5C3.58172 39.5 0 43.0816 0 47.5C0 51.918 3.58172 55.5 8 55.5C12.4183 55.5 16 51.918 16 47.5V24.9095L40 16.338ZM40 12.0906L16 20.662V12.9093L40 4.33793V12.0906ZM36 39.5C38.2092 39.5 40 41.2908 40 43.5C40 45.7092 38.2092 47.5 36 47.5C33.7908 47.5 32 45.7092 32 43.5C32 41.2908 33.7908 39.5 36 39.5ZM8 43.5C10.2091 43.5 12 45.2908 12 47.5C12 49.7092 10.2091 51.5 8 51.5C5.79088 51.5 4 49.7092 4 47.5C4 45.2908 5.79088 43.5 8 43.5Z" fill="white"/>
-          </svg>
+    
+          <button onclick="window.location.href = './settings.html'" class="lowermenubuttonadditions">
     
           <svg xmlns="http://www.w3.org/2000/svg" width="44" height="56" viewBox="0 0 31 34" fill="none" class="lowermenuicons">
             <path d="M1.40577 22.0693C4.3167 19.2684 4.3167 14.6095 1.40577 11.8083L0.878906 11.3017C1.48302 9.57407 2.35698 7.97995 3.44808 6.57414L4.15615 6.78346C8.06277 7.93758 12.1396 5.58485 13.0947 1.62447L13.3446 0.588144C14.1894 0.445748 15.0562 0.371704 15.9394 0.371704C16.823 0.371704 17.6898 0.445747 18.5346 0.588178L18.7845 1.62447C19.7396 5.58485 23.8164 7.93758 27.723 6.78346L28.4311 6.57414C29.5222 7.97995 30.3961 9.57407 31.0002 11.3017L30.4734 11.8083C27.5625 14.6095 27.5625 19.2684 30.4734 22.0693L30.9999 22.5762C30.3961 24.3038 29.5222 25.898 28.4311 27.3038L27.723 27.0944C23.8164 25.9403 19.7396 28.2931 18.7845 32.2531L18.5346 33.2897C17.6898 33.4321 16.823 33.5062 15.9394 33.5062C15.0562 33.5062 14.1894 33.4321 13.3446 33.2897L13.0947 32.2531C12.1396 28.2931 8.06277 25.9403 4.15615 27.0944L3.44808 27.3038C2.35698 25.898 1.48302 24.3038 0.878906 22.5762L1.40577 22.0693ZM11.5728 16.9388C11.5728 19.4343 13.5279 21.4574 15.9394 21.4574C18.3512 21.4574 20.3063 19.4343 20.3063 16.9388C20.3063 14.4436 18.3512 12.4206 15.9394 12.4206C13.5279 12.4206 11.5728 14.4436 11.5728 16.9388Z" fill="white"/>
           </svg>
+
+        </button>
     </div>
 
 
@@ -145,6 +144,51 @@ const settingsDataParsed = JSON.parse(settingsData);
 const tasklyData = localStorage.getItem('myTasklyData');
 const tasklyDataParsed = JSON.parse(tasklyData);
 let xp = 0
+const treeGrowthTimeMIN = parseInt(settingsDataParsed['treeGrowthTotalTime']) / 5
+const treeGrowthTime = (treeGrowthTimeMIN * 60000) / 5
+let treeStatus = 1
+const treeGrowthBreak = settingsDataParsed['treeGrowthBreak']
+let treeBreakStatus = 0
+
+function closeTree(){
+    const treebg = document.querySelector('.treebg');
+    if (treebg.style.display === "none") {
+        document.getElementById('tasklyTreeMessages').style.display = "flex";
+        treebg.style.display = "flex";
+        console.log("Tree is now visible");
+    } else {
+        document.getElementById('tasklyTreeMessages').style.display = "none";
+        treebg.style.display = "none";
+        console.log("Tree is now hidden");
+
+    }
+}
+
+async function updateTreeGrowth(){
+    treeStatus++
+    console.log(`Tree Status: ${treeStatus}`)
+
+    document.querySelector('.treeimg').src = `../Assets/${treeStatus}.png`
+    if (treeStatus == 5 && treeGrowthBreak == "yes"){
+        
+        treeStatus = 0;
+         await wait(5000)
+        startBreak();
+        treeBreakStatus = 1
+        return;
+    } 
+
+    setTimeout(updateTreeGrowth, treeGrowthTime);
+}
+
+function startTreeGrowth (){
+
+    updateTreeGrowth();
+    console.log(`Tree Status Started!`)
+
+}
+
+
 function updateGoals() {
     
     if (metgoals == 0){
@@ -249,7 +293,20 @@ fetch('/json/quotes.json')
     const author = data[quotenum].author;
     document.getElementById('dayviewquote').textContent =  `"${quote}" -${author}`;
     });
+
+    generateMessage();
 }
+
+function generateMessage() {
+fetch('/json/tasklyTreeMessages.json')
+  .then(response => response.json())
+  .then(data => {
+    const messagenum = Math.floor(Math.random() * data.length); // this generates a random number between 1 and the number of quotes there are
+    const message = data[messagenum].content;
+    document.getElementById('tasklyTreeMessages').textContent =  message;
+    });
+}
+
 
 function time() {
     const date = new Date();
@@ -344,6 +401,12 @@ function endBreak() {
                     inautobreak = 0;
                 } else {
                     document.getElementById('breakTextENDING').textContent = "ERR: Break screen is unable to show. Widgits and or BreakContent unable to load. Refresh the page to try again."
+                }
+
+                if (treeBreakStatus == 1){
+                    treeBreakStatus = 0;
+                    console.log("Tree Break Status: Resumed from break")
+                    startTreeGrowth();
                 }
             
             
@@ -535,14 +598,14 @@ const currentData = getData();
 const taskData = getTasks();
 const noteData = document.querySelector('.notesinput').value;
 const themedata = currenttheme;
-
+const currentXP = xp;
 if(currentData.completedTasks !== taskscomplete || currentData.theme !== currenttheme || currentData.metgoals !== metgoals){
     const dataSave = {
     tasks: taskData,
     notes: noteData,
     theme: themedata,
     completedTasks: taskscomplete,
-    xp: xp
+    xp: currentXP
 }
 
 localStorage.setItem('mytasklyData', JSON.stringify(dataSave));
@@ -567,6 +630,11 @@ window.onload = function() {
     setInterval(time,changeintime);
     setInterval(saveData,500)
     setInterval(generatequote, 60 * 1000);
+    if (settingsDataParsed['treeGrowthEnabled'] == "yes"){
+        startTreeGrowth();
+    } else {
+        closeTree();
+    }
   //   breakLength = settingsDataParsed['breaks_duration'] * 1000
    //  breakFrequency = settingsDataParsed['breaks_fequency'] * 1000
     /// autoBreakEnabled = setInterval(startAutoBreak, breakFrequency);

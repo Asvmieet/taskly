@@ -12,16 +12,33 @@
 <h1>Configure Taskly</h1>
 
 <div id="inputs">
-
+<h3>Break Duration</h3>
 <textarea class="notesinput" id="breakDuration" placeholder="breakDuration"></textarea>
+<h3>Goals</h3>
 <textarea class="notesinput" id="goals" placeholder="Goals"></textarea>
+<h3>XP Per Task</h3>
 <textarea class="notesinput" id="xp_per_task" placeholder="XP Per Task"></textarea>
-<textarea class="notesinput" id="xp_required" placeholder="XP Required"></textarea>
+<h3>XP Goal</h3>
+<textarea class="notesinput" id="xp_required" placeholder="XP Goal"></textarea>
+<h3>Start Break when XP Goal is met. (yes/no) | Lowercase Only</h3>
 <textarea class="notesinput" id="break_xpSTART" placeholder="Start Break when XP Goal is met. (yes/no)"></textarea>
-
+<h3>Do you want the TasklyTree to grow? (yes/no)</h3>
+<textarea class="notesinput" id="treeGrowthEnabled" placeholder="Do you want the tree to grow? (yes/no)"></textarea>
+<h3>Tree Growth Time: Enter a time in minutes. | This is the total time the tree will go from seed to fully grown.</h3>
+<textarea class="notesinput" id="treeGrowthTotalTime" placeholder=" Tree Growth Time: Enter a time in minutes. | This is the total time the tree will go from seed to fully grown."></textarea>
+<h3>Start Break when Tree is grown is met. (yes/no) | Lowercase Only</h3>
+<textarea class="notesinput" id="treeGrowthBreak" placeholder="Start Break when Tree is grown is met. (yes/no)"></textarea>
+<div class="nextto">
+<button class="auth1" onclick="clearSettings()">Clear Settings</button>
+<button class="auth1" onclick="clearData()">Clear Data</button>
 
 </div>
-<button class="auth1" onclick="saveSettings(`breaks_duration`, document.getElementById(`breakDuration`).value, 'int')">Go</button>
+
+</div>
+
+
+<button class="auth1" onclick="saveSettings()">Save</button>
+<button class="auth1" onclick="window.location='./hub.html'">Resume Session</button>
 
 
 </div>
@@ -34,6 +51,8 @@ window.onload = function() {
     document.getElementById("breakDuration").value = settingsData.breaks_duration;
     document.getElementById("goals").value = settingsData.options_goals;
 }
+
+
 
 function edit(){
     var username = document.getElementById("Username").value;
@@ -52,7 +71,10 @@ const mySettingsData = {
     options_goals: 5,
     xp_required: 100,
     xp_per_task: 10,
-    xp_breakSTART: "no"
+    break_xpSTART: "no",
+    treeGrowthTotalTime: 60, // In Minutes
+    treeGrowthBreak: "no",
+    treeGrowthEnabled: "yes"
 
 }
 
@@ -62,6 +84,18 @@ const mySettingsData = {
 function setSettings() {
     localStorage.setItem('mySettingsData', JSON.stringify(mySettingsData));
 }
+
+function clearSettings(){
+    localStorage.removeItem('mySettingsData');
+    setSettings();
+    location.reload();
+}
+
+function clearData(){
+    localStorage.removeItem('mytasklyData');
+}
+
+
 function getSettings() {
     const settingsData = localStorage.getItem('mySettingsData');
     if (settingsData) {
@@ -79,7 +113,12 @@ window.onload = function() {
     document.getElementById("xp_per_task").value = settingsData.xp_per_task;
     document.getElementById("xp_required").value = settingsData.xp_required;
     document.getElementById("break_xpSTART").value = settingsData.break_xpSTART;
+    document.getElementById("treeGrowthTotalTime").value = settingsData.treeGrowthTotalTime;
+    document.getElementById("treeGrowthBreak").value = settingsData.treeGrowthBreak;
+    document.getElementById("treeGrowthEnabled").value = settingsData.treeGrowthEnabled;
 
+
+    
 
 }
 
@@ -105,7 +144,9 @@ function updateSettings(setting, value, type) {
         console.log(`Error Log - updateSettings(): ${value} is not a yes/no in LOWERCASE. Setting: ${setting} was not updated.`);
         return 0;
     }
+
 }
+
 console.log(setting, value, type);
     const settingsDataUS = getSettings();
     settingsDataUS[setting] = value;
@@ -118,6 +159,12 @@ function saveSettings() {
     updateSettings("xp_per_task", document.getElementById('xp_per_task').value, "int");
     updateSettings("xp_required", document.getElementById('xp_required').value, "int");
     updateSettings("break_xpSTART", document.getElementById('break_xpSTART').value, "y/n");
+    updateSettings("treeGrowthTotalTime", document.getElementById('treeGrowthTotalTime').value, "int");
+    updateSettings("treeGrowthBreak", document.getElementById('treeGrowthBreak').value, "y/n");
+    updateSettings("treeGrowthEnabled", document.getElementById('treeGrowthEnabled').value, "y/n");
+
+
+    
 }
 
 </script>

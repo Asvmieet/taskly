@@ -504,3 +504,27 @@ flex-wrap: wrap;
 
 
   
+        .treeimg{
+            border-radius: 15px;
+        }
+
+        .treebg {
+            margin-top: 25px;
+            background-color: var(--widgit-bg);
+            border-radius: 8px;
+            width: 450px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;  
+            color: var(--LMIcons);
+            padding: 20px;
+            overflow: auto;
+            resize: both;
+            min-width: 450px;
+            max-height: 90%;
+            margin-left: 25px;
+            align-items: flex-start;
+            min-height: 200px;
+        }
