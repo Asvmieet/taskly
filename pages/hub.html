@@ -3,6 +3,8 @@
     <head>
         <link rel="stylesheet" href="/css/hub.css">
         <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
+
+   
     </head>
 
     <body>
@@ -62,6 +64,8 @@
             <button onclick="saveData()">Save Data</button>
             <button onclick="changeTheme()">Change Theme</button>
             <button onclick="setData()">Set Data</button>
+            <button onclick="setSettings()">Set Data</button>
+
             <button onclick="window.location.href = '../index.html'">Home</button>
 
 
@@ -123,6 +127,9 @@
 <!-- Scripts -->
 <script>
 
+
+
+
 function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 
@@ -133,14 +140,17 @@ let ts = 0;
 let taskscomplete = 0;    
 let metgoals = 0
 var createdTasks = 0
+const settingsData = localStorage.getItem('mySettingsData');
+const settingsDataParsed = JSON.parse(settingsData);
+const tasklyData = localStorage.getItem('myTasklyData');
+const tasklyDataParsed = JSON.parse(tasklyData);
+
 function updateGoals() {
     
     if (metgoals == 0){
 
-    fetch('/json/settings.json')
-        .then(response=>response.json())
-        .then(data => {
-        const goals = data.options_goals;
+ try{
+        const goals = parseInt(settingsDataParsed['options_goals'])
            
         taskscomplete ++;
         let remainingTasks = goals - taskscomplete
@@ -159,10 +169,11 @@ function updateGoals() {
             updateGoals();
 
         }
-        })
-        .catch(error => {
+        
+     } catch(error) {
+        
             document.getElementById('goalstext').textContent = `Error displaying goals: ${error}`
-        });
+        };
     }
     }
 
@@ -259,10 +270,12 @@ var inautobreak = 1
   }
 
 function startBreak() {
-    fetch('/json/settings.json')
-        .then(response=>response.json())
-        .then(data=> {
-        let breakLength = data.breaks_duration
+
+    try{
+
+        let breakLength = parseFloat(settingsDataParsed['breaks_duration'])
+        console.log(breakLength)
+        
         const date2 = new Date();
         date2.setMinutes(date2.getMinutes() + breakLength );
         const hours2 = date2.getHours().toString().padStart(2, '0');
@@ -273,9 +286,11 @@ function startBreak() {
             var breakcontent = document.getElementById('BreakContent')
             var endtime = document.getElementById('breakTextENDING')
             var breaktime = breakLength * 60000
+
             wait(breaktime).then(() => {
                 endBreak();
             });
+            
                 if (items && breakcontent){
 
                     items.style.display = "none";
@@ -288,9 +303,14 @@ function startBreak() {
                 } else {
                     document.getElementById('goalstext').textContent = "ERR: Break screen is unable to load. Widgits and or BreakContent unable to load. Refresh the page to try again."
                 }
+
+            } catch(err){
+                console.log(`STARTBREAK: ERR: ${err}`);
+                document.getElementById('goalstext').textContent = `ERR: ${err}`
+            }
             
             
-        })
+        
 } 
 
 
@@ -344,11 +364,9 @@ let currenttheme = "clasic"
 function changeTheme() {
 if (currenttheme == "dark"){
     setColors("clasic")
-    currenttheme = "clasic"
 
 } else if (currenttheme == "clasic"){
     setColors("dark")
-    currenttheme = "dark"
 
 
 }
@@ -363,7 +381,6 @@ function setColors(style) {
     try{
         console.log("SETCOLORS: TRY | Started Clasic TRY");
 
-    currenttheme = "clasic"
 
     fetch('../json/lightModeColors.json')
         .then(response=>response.json())
@@ -381,7 +398,10 @@ function setColors(style) {
    document.body.style.setProperty('--placeHolder', data.placeHolders) 
    document.body.style.setProperty('--LMIcons', data.LMIcons)
    console.log("SETCOLORS: SET | Set to clasic");
-        });
+   currenttheme = "clasic"
+
+
+});
     }catch(err){
         console.log(`SETCOLORS: Clasic ERR: ${err}`);
 
@@ -390,7 +410,6 @@ function setColors(style) {
     fetch('/json/darkModeColors.json')
         .then(response=>response.json())
         .then(data2=> {
-            currenttheme = "dark"
     document.body.style.setProperty('background-color', data2.bg);
     document.body.style.setProperty('background-size', '0%', 'important');
 
@@ -406,17 +425,29 @@ function setColors(style) {
    if (!document.querySelector('h2')){
        console.log("H2 not found")
    }
+   currenttheme = "dark"
 
-   console.log("Set to dark mode.")
+   console.log("Set to dark mode.");
+})
 
-        });
-}
-    } catch(errorSC){
+   .catch(errorSC => {
         console.log(`Error setting colors: ${errorSC}`);
-        
+    
+    
+   })
+
+
+}
+  
 
     }
+    catch(err){
+        console.log(`SETCOLORS: ERR: ${err}`);
+    }
+    console.log("SETCOLORS: Finished");
 }
+
+
 
 function getData(){
 
@@ -440,6 +471,7 @@ return tasklyDataGET;
 }
 
 function setData(){ // NOT FINISHED
+    console.log("SETDATA: Started");
     try{
 
     const dataPUT = getData();
@@ -447,13 +479,14 @@ function setData(){ // NOT FINISHED
     const tasksarrayPUT = dataPUT.tasks;
     const notesPUT = dataPUT.notes;
     const themePUT = dataPUT.theme
-    taskscomplete = dataPUT.completedTasks + 1;
+    taskscomplete = dataPUT.completedTasks;
 
     for(let i = 0; i<tasksarrayPUT.length; i++){
   createtaskPreset(tasksarrayPUT[i]);
     }
     document.getElementById('notesinput').value = notesPUT;
         setColors(themePUT);
+        updateGoals();
 
 } catch(err){
     createtaskPreset(`ERR: ${err}`)
@@ -461,29 +494,6 @@ function setData(){ // NOT FINISHED
 
 }
 }
-
-
-window.onload = function() {
-    setColors('clasic');
-    setData();
-    fetch('/json/settings.json')
-        .then(response=>response.json())
-        .then(data=> {
-    generatequote();
-    time();
-    setInterval(time,changeintime);
-    setInterval(saveData,changeintime)
-    setInterval(generatequote, 60 * 1000);
-     breakLength = data.breaks_duration * 1000
-     breakFrequency = data.breaks_fequency * 1000
-    /// autoBreakEnabled = setInterval(startAutoBreak, breakFrequency);
-
-    
-        });
-
-}
-
-
 
 function getTasks(){
     let tasks = []
@@ -499,24 +509,56 @@ function getTasks(){
 }
 
 function saveData(){
+    try{
+
+const currentData = getData();
 const taskData = getTasks();
 const noteData = document.querySelector('.notesinput').value;
+const themedata = currenttheme;
 
-
-const mytasklyData = {
+if(currentData.completedTasks !== taskscomplete || currentData.theme !== currenttheme || currentData.metgoals !== metgoals){
+    const dataSave = {
     tasks: taskData,
     notes: noteData,
-    theme: currenttheme,
+    theme: themedata,
     completedTasks: taskscomplete
-
-
 }
 
+localStorage.setItem('mytasklyData', JSON.stringify(dataSave));
 
-localStorage.setItem('mytasklyData', JSON.stringify(mytasklyData));
-    const tasklyData = JSON.parse(localStorage.getItem("mytasklyData"));
   
+    console.log("SETDATA: Data changed, resetting tasks complete and goals");
+} else {
+    console.log("SETDATA: No data change detected, not resetting tasks complete and goals");
+} 
+
+} catch (err){
+    console.log(`SETDATA: ERR: ${err}`);
 }
+}
+
+
+window.onload = function() {
+    setColors('clasic');
+    setData();
+    generatequote();
+    time();
+    setInterval(time,changeintime);
+    setInterval(saveData,500)
+    setInterval(generatequote, 60 * 1000);
+  //   breakLength = settingsDataParsed['breaks_duration'] * 1000
+   //  breakFrequency = settingsDataParsed['breaks_fequency'] * 1000
+    /// autoBreakEnabled = setInterval(startAutoBreak, breakFrequency);
+
+        
+
+}
+
+
+
+
+
+
 
 
 </script>

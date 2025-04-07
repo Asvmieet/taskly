@@ -11,21 +11,90 @@
 
 <h1>Configure Taskly</h1>
 
-<textarea class="notesinput" id="Username" placeholder="Username"></textarea>
-<textarea class="notesinput" id="Password" placeholder="Password"></textarea>
-<button class="auth1" onclick="edit()">Go</button>
+<div id="inputs">
+
+<textarea class="notesinput" id="breakDuration" placeholder="breakDuration"></textarea>
+<textarea class="notesinput" id="goals" placeholder="Goals"></textarea>
+</div>
+<button class="auth1" onclick="saveSettings(`breaks_duration`, document.getElementById(`breakDuration`).value, 'int')">Go</button>
 
 
 </div>
 
 
 <script>
+
+window.onload = function() {
+    const settingsData = getSettings();
+    document.getElementById("breakDuration").value = settingsData.breaks_duration;
+    document.getElementById("goals").value = settingsData.options_goals;
+}
+
 function edit(){
     var username = document.getElementById("Username").value;
     var password = document.getElementById("Password").value;
     if(username == "admin" && password == "admin"){
         window.location.href = "/pages/hub.html";
 }
+}
+
+const mySettingsData = {
+    breaks_enabled: true,
+    breaks_time: 3,
+    breaks_frequency: 10,
+    breaks_duration: 0.5, // in minutes
+    music_category: "pop",
+    options_goals: 5
+
+}
+
+
+
+
+function setSettings() {
+    localStorage.setItem('mySettingsData', JSON.stringify(mySettingsData));
+}
+function getSettings() {
+    const settingsData = localStorage.getItem('mySettingsData');
+    if (settingsData) {
+        return JSON.parse(settingsData);
+    } else {
+        return mySettingsData;
+    }
+    
+}
+
+window.onload = function() {
+    const settingsData = getSettings();
+    document.getElementById("breakDuration").value = settingsData.breaks_duration;
+    document.getElementById("goals").value = settingsData.options_goals;
+}
+
+function resetSettings() {
+    localStorage.removeItem('mySettingsData');
+    setSettings();
+}
+
+function updateSettings(setting, value, type) {
+    if (type == 'int') {
+        if (isNaN(value)){
+           console.log(`Error Log - updateSettings(): ${value} is not an int. Setting: ${setting} was not updated.`);
+            return 0;
+        } else {
+
+            value = parseFloat(value);
+        }
+
+    }
+console.log(setting, value, type);
+    const settingsDataUS = getSettings();
+    settingsDataUS[setting] = value;
+    localStorage.setItem('mySettingsData', JSON.stringify(settingsDataUS));
+}
+
+function saveSettings() {
+    updateSettings("breaks_duration", document.getElementById('breakDuration').value, "int");
+    updateSettings("options_goals", document.getElementById('goals').value, "int");
 }
 </script>
 
