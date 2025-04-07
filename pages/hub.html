@@ -365,6 +365,8 @@ function startBreak() {
 
             wait(breaktime).then(() => {
                 endBreak();
+                let completedSound = new Audio('../Audio/good-6081.mp3');
+                completedSound.play();
             });
             
                 if (items && breakcontent){
