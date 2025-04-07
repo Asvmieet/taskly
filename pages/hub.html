@@ -144,19 +144,38 @@ const settingsData = localStorage.getItem('mySettingsData');
 const settingsDataParsed = JSON.parse(settingsData);
 const tasklyData = localStorage.getItem('myTasklyData');
 const tasklyDataParsed = JSON.parse(tasklyData);
-
+let xp = 0
 function updateGoals() {
     
     if (metgoals == 0){
 
  try{
         const goals = parseInt(settingsDataParsed['options_goals'])
-           
+      
+      if (!parseInt(settingsDataParsed['xp_required']) == 0){
+        xp = xp + parseInt(settingsDataParsed['xp_per_task'])
+        console.log(xp)
+        if (xp >= parseInt(settingsDataParsed['xp_required'])){
+            console.log(xp)
+            xp = 0;
+            console.log(xp)
+            let completedSound = new Audio('../Audio/good-6081.mp3');
+            completedSound.play();
+            if (settingsDataParsed['break_xpSTART'] == "yes"){
+                startBreak();
+            }
+            
+        }
+        
+
+      }
         taskscomplete ++;
         let remainingTasks = goals - taskscomplete
         console.log(remainingTasks)
         if (remainingTasks === 0){
             metgoals = 0;
+            let completedSound = new Audio('../Audio/good-6081.mp3');
+            completedSound.play();
             document.getElementById('goalstext').textContent = `You have met your goal of ${goals} tasks! Complete another task to restart your goal!`;
             
         } else {
@@ -480,6 +499,7 @@ function setData(){ // NOT FINISHED
     const notesPUT = dataPUT.notes;
     const themePUT = dataPUT.theme
     taskscomplete = dataPUT.completedTasks;
+    xp = dataPUT.xp;
 
     for(let i = 0; i<tasksarrayPUT.length; i++){
   createtaskPreset(tasksarrayPUT[i]);
@@ -521,7 +541,8 @@ if(currentData.completedTasks !== taskscomplete || currentData.theme !== current
     tasks: taskData,
     notes: noteData,
     theme: themedata,
-    completedTasks: taskscomplete
+    completedTasks: taskscomplete,
+    xp: xp
 }
 
 localStorage.setItem('mytasklyData', JSON.stringify(dataSave));

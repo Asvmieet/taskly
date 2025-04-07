@@ -4,7 +4,8 @@ const mySettingsData = {
     breaks_frequency: 10,
     breaks_duration: 0.5,
     music_category: "pop",
-    options_goals: 5
+    options_goals: 5,
+    XP: 0
 
 }
 
