@@ -58,6 +58,8 @@
         <h1 class="dayviewtime" id="dayviewtime">11:59 PM</h1>
         <h5 class="dayviewdate" id="dayviewdate">2/25/25</h5>
         <h6 class="dayviewdate" id="goalstext">Complete a task to begin!</h5>
+        <h6 class="dayviewdate" id="xpTEXT">You have 0 xp.</h5>
+
 
     </div>
     
@@ -176,7 +178,11 @@ async function updateTreeGrowth(){
         startBreak();
         treeBreakStatus = 1
         return;
-    } 
+    } else if (treeStatus == 5 && treeGrowthBreak == "no"){
+        treeStatus = 0;
+        startTreeGrowth();
+        return;
+    }
 
     setTimeout(updateTreeGrowth, treeGrowthTime);
 }
@@ -198,6 +204,7 @@ function updateGoals() {
       
       if (!parseInt(settingsDataParsed['xp_required']) == 0){
         xp = xp + parseInt(settingsDataParsed['xp_per_task'])
+        document.getElementById('xpTEXT').textContent = `You have ${xp} xp!`
         console.log(xp)
         if (xp >= parseInt(settingsDataParsed['xp_required'])){
             console.log(xp)
@@ -570,6 +577,7 @@ function setData(){ // NOT FINISHED
   createtaskPreset(tasksarrayPUT[i]);
     }
     document.getElementById('notesinput').value = notesPUT;
+    document.getElementById('xpTEXT').textContent = `You have ${xp} xp!`
         setColors(themePUT);
         updateGoals();
 
